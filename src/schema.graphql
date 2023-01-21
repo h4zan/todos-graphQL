@@ -1,0 +1,33 @@
+type Todos {
+	id: ID!
+	task: String
+	isDone: Boolean
+	#todoType:todoType
+	# ticket: [Ticket]
+}
+
+type DeletedResourceResponse {
+	deletedId: ID
+	success: Boolean
+}
+
+enum ProjectType {
+	SCRUM
+	KANBAN
+}
+input CreateTodoInputs {
+	name: String!
+	description: String
+	#todoType:todoType
+}
+
+type Query {
+	getTodosById(todosId: ID!): Todos
+	getAllTodos: [Todos]
+}
+
+type Mutation {
+	createTodos(task: String!, isDone: Boolean): Todos
+	updateTodos(id: ID!, task: String!, isDone: Boolean): Todos
+	deleteTodos(todoId: ID!): DeletedResourceResponse
+}
